@@ -5,16 +5,17 @@
    GLOBAL STYLES
 ========================= */
 body {
-  background-color: #f5f7fa;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb, #e8eaf6);
+  background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 30px;
   color: #333;
 }
 
 h3 {
   font-weight: 600;
-  color: #1a237e;
+  color: #0d47a1;
 }
 
 .btn {
@@ -26,16 +27,18 @@ h3 {
 
 .btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* =========================
    TABLE STYLING
 ========================= */
 .table {
-  background-color: #fff;
+  background-color: #ffffffcc;
+  backdrop-filter: blur(6px);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   width: 100%;
   border-collapse: collapse;
 }
@@ -54,8 +57,8 @@ h3 {
 }
 
 .table-hover tbody tr:hover {
-  background-color: #f0f4ff;
-  transition: 0.2s;
+  background-color: #f1f8ff;
+  transition: background-color 0.3s ease;
 }
 
 /* =========================
@@ -68,7 +71,7 @@ h3 {
 }
 
 .btn-warning {
-  background: linear-gradient(45deg, #ffb300, #ffca28);
+  background: linear-gradient(45deg, #ffa000, #ffca28);
   border: none;
   color: #fff;
 }
@@ -93,6 +96,17 @@ h3 {
 }
 
 /* =========================
+   CARD WRAPPER
+========================= */
+.container-box {
+  background-color: #ffffffbb;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+/* =========================
    RESPONSIVE DESIGN
 ========================= */
 @media (max-width: 768px) {
@@ -109,37 +123,39 @@ h3 {
 }
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h3>Student List</h3>
-  <a href="{{ url_for('add_student') }}" class="btn btn-success">+ Add Student</a>
-</div>
+<div class="container-box">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Student List</h3>
+    <a href="{{ url_for('add_student') }}" class="btn btn-success">+ Add Student</a>
+  </div>
 
-<table class="table table-bordered table-hover">
-  <thead class="table-primary">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Course</th>
-      <th>Phone</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for s in students %}
-    <tr>
-      <td>{{ s.id }}</td>
-      <td>{{ s.name }}</td>
-      <td>{{ s.email }}</td>
-      <td>{{ s.course }}</td>
-      <td>{{ s.phone }}</td>
-      <td>
-        <a href="{{ url_for('edit_student', id=s.id) }}" class="btn btn-warning btn-sm">Edit</a>
-        <a href="{{ url_for('delete_student', id=s.id) }}" class="btn btn-danger btn-sm"
-           onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Course</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.course }}</td>
+        <td>{{ s.phone }}</td>
+        <td>
+          <a href="{{ url_for('edit_student', id=s.id) }}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{ url_for('delete_student', id=s.id) }}" class="btn btn-danger btn-sm"
+             onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
